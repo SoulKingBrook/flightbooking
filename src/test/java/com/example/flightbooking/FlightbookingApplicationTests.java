@@ -31,7 +31,7 @@ class FlightbookingApplicationTests {
 	}
 	@Test
 	void createFlightTest(){
-		FlightRequest flightRequest= new FlightRequest("operating airlines", "dcity", "acity", new Date(), Timestamp.from(Instant.now()), new ArrayList<Passenger>());
+		FlightRequest flightRequest= new FlightRequest("operating airlines2", "dcity2", "acity2", new Date(), Timestamp.from(Instant.now()), new ArrayList<Passenger>());
 		flightService.addNewFlight(flightRequest);
 	}
 }

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="t_flight")
@@ -18,7 +19,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Flight {
         @Id
-        @GeneratedValue(strategy = GenerationType.UUID)
+        @GeneratedValue(generator = "flightNumberGenerator")
+        @GenericGenerator(name = "flightNumberGenerator",strategy = "com.example.flightbooking.customGenerator.FlightNumberGenerator")
         private String flightNumber;
         private String operatingAirlines;
         private String departureCity;
