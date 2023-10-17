@@ -1,24 +1,25 @@
 package com.example.flightbooking.model;
 
-
+import com.example.flightbooking.enums.Role;
 import jakarta.persistence.Entity;
-
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
-@Table(name="t_passenger")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Passenger {
+@Getter
+@Setter
+public class User {
     @Id
-    private String userName;
-    private int seatNo;
-    private String ticket;
+    String email;
+    String password;
+    String mobile;
+    List<Role> roles;
+
 }

@@ -20,7 +20,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Flight {
         @Id
         @GeneratedValue(generator = "flightNumberGenerator")
-        @GenericGenerator(name = "flightNumberGenerator",strategy = "com.example.flightbooking.customGenerator.FlightNumberGenerator")
+        @GenericGenerator(name = "flightNumberGenerator",strategy = "com.example.flightbooking.utils.FlightNumberGenerator")
         private String flightNumber;
         private String operatingAirlines;
         private String departureCity;

@@ -1,4 +1,4 @@
-package com.example.flightbooking.customGenerator;
+package com.example.flightbooking.utils;
 
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
