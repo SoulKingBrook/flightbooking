@@ -8,11 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface FlightRepository extends JpaRepository<Flight,String> {
 
-    @Query("select f from Flight f where f.estimatedDepartureTime between :start and :end")
-    List<Flight> findFlightsInGivenRange(@Param("start") Timestamp start,@Param("end") Timestamp end);
+    @Query("select f from Flight f where f.departureCity= :source and f.arrivalCity= :dest and f.dateOfDeparture between :start and :end")
+    Collection<Flight> findFlightsInGivenRange(@Param("start") Date start, @Param("end") Date end,@Param("source") String source,@Param("dest") String dest);
 }

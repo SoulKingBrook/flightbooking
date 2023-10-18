@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +29,9 @@ public class FlightService {
         Flight flight = mapper.toFlight(flightRequest);
         flightRepository.save(flight);
     }
-    public void getFlightsinTimeRange(Timestamp rangeStart, Timestamp rangeEnd){
+    public List<Flight> getFlightsinTimeRange(Date rangeStart, Date rangeEnd,String source,String destination){
 
-        flightRepository.findFlightsInGivenRange(rangeStart,rangeEnd).stream().map(model-> model.getFlightNumber()).forEach(log::info);
+        List<Flight> flights = flightRepository.findFlightsInGivenRange(rangeStart,rangeEnd,source,destination).stream().toList();
+        return flights;
     }
 }

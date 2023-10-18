@@ -39,7 +39,7 @@ public class UserService {
 
     }
     public boolean authenticateUser(@RequestBody LoginRequest loginRequest) throws Exception{
-        Optional<User> user = userRepository.findById(loginRequest.getUserName());
+        Optional<User> user = userRepository.findById(loginRequest.getEmail());
         if(user.isEmpty()){
             throw new Exception("enter a valid username");
         }

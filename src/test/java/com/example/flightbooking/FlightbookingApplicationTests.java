@@ -14,6 +14,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,12 +34,18 @@ class FlightbookingApplicationTests {
 
 	@Test
 	void createFlightTest(){
-		FlightRequest flightRequest= new FlightRequest("operating airlines2", "dcity2", "acity2", new Date(), Timestamp.from(Instant.now()), new ArrayList<Passenger>());
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		try {
+			Date date = format.parse("2023/11/06 00:00:00");
+		FlightRequest flightRequest= new FlightRequest("operating airlines2", "dcity1", "acity1", date, Timestamp.from(Instant.now()), new ArrayList<Passenger>());
 		flightService.addNewFlight(flightRequest);
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	@Test
 	void findFlightsTest(){
-		flightService.getFlightsinTimeRange(Timestamp.valueOf("2023-10-05 15:39:26.604292"),Timestamp.valueOf("2023-10-05 21:02:01.045696"));
+		flightService.getFlightsinTimeRange(Timestamp.valueOf("2023-10-05 15:39:26.604292"),Timestamp.valueOf("2023-10-05 21:02:01.045696"),"acity3","dcity2");
 	}
 
 	@Test

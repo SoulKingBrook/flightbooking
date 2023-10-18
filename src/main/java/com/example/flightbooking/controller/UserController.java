@@ -30,16 +30,15 @@ public class UserController {
     @PostMapping("/generate")
     @ResponseStatus(HttpStatus.OK)
     public String login(@RequestBody LoginRequest loginRequest) throws InvalidCredentialsException {
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword()));
+        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         if(authenticate.isAuthenticated()) {
-            return jwtUtil.generateToken(loginRequest.getUserName());
+            return jwtUtil.generateToken(loginRequest.getEmail());
         }
         else{
             throw new InvalidCredentialsException("invalid username or password");
         }
     }
     @PostMapping("/register")
-    @PreAuthorize("Passenger")
     public UserResponse registerUser(@RequestBody RegistrationRequest registrationRequest) throws Exception {
         UserResponse userResponse = new UserResponse();
         try {
