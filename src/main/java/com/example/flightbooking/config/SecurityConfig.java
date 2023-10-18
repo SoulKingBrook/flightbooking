@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -26,6 +27,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Autowired
@@ -44,9 +46,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> {
                     authorize
                             .requestMatchers("/auth/**").permitAll()
-                            .requestMatchers("/app/**").hasAnyAuthority("Passenger","Admin")
-                            .anyRequest().denyAll();
-        })
+                            .requestMatchers("/app/**").authenticated()
+                            .anyRequest().permitAll();
+        }).cors(c -> c.configurationSource(corsConfigurations()))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -65,4 +67,14 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+    @Bean
+    public CorsConfigurationSource corsConfigurations() {
+        CorsConfiguration corsConfig = new CorsConfiguration();
+        corsConfig.applyPermitDefaultValues();
+        corsConfig.addAllowedOrigin("http://localhost:3000");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfig);
+        return source;
+    }
+
 }

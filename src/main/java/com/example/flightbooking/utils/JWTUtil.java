@@ -37,17 +37,26 @@ public class JWTUtil {
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
+        try {
+            final Claims claims = extractAllClaims(token);
+            return claimsResolver.apply(claims);
+        }
+        catch (Exception e){
+            return null;
+        }
     }
 
     private Claims extractAllClaims(String token) {
+        try{
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSignKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+        }catch (Exception e){
+            return null;
+        }
     }
 
     private Boolean isTokenExpired(String token) {

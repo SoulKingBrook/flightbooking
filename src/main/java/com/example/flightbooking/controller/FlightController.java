@@ -6,6 +6,7 @@ import com.example.flightbooking.repository.FlightRepository;
 import com.example.flightbooking.service.FlightService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -13,9 +14,9 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@CrossOrigin
-@RequestMapping("/auth/booking")
 @RequiredArgsConstructor
+@CrossOrigin
+@RequestMapping("/app/booking")
 
 public class FlightController {
 

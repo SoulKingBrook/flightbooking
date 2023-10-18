@@ -28,7 +28,6 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/generate")
-    @ResponseStatus(HttpStatus.OK)
     public String login(@RequestBody LoginRequest loginRequest) throws InvalidCredentialsException {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         if(authenticate.isAuthenticated()) {
