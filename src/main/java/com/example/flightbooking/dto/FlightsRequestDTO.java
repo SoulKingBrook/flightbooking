@@ -5,16 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class FlightTimeRangeDTO {
+public class FlightsRequestDTO {
     String source;
     String destination;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-    private Date rangeStart;
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-    private Date rangeEnd;
+    private Date departureDate;
+    private String bookingClass;
+    private String trip;
+    private int noOfAdults;
+    private int noOfChildren;
+    private int noOfInfants;
+
 }

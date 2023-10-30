@@ -1,19 +1,14 @@
 package com.example.flightbooking.service;
 
-import com.example.flightbooking.dto.FlightRequest;
-import com.example.flightbooking.mapper.Mapper;
-import com.example.flightbooking.model.Flight;
-import com.example.flightbooking.repository.FlightRepository;
+import com.example.flightbooking.dto.FlightDataDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.reactive.function.client.WebClient;
 
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,17 +16,27 @@ import java.util.stream.Collectors;
 @Transactional
 @Slf4j
 public class FlightService {
-    private final FlightRepository flightRepository;
-    private final Mapper mapper;
+    private final WebClient.Builder webClient;
 
-    public void addNewFlight(@RequestBody FlightRequest flightRequest){
-
-        Flight flight = mapper.toFlight(flightRequest);
-        flightRepository.save(flight);
-    }
-    public List<Flight> getFlightsinTimeRange(Date rangeStart, Date rangeEnd,String source,String destination){
-
-        List<Flight> flights = flightRepository.findFlightsInGivenRange(rangeStart,rangeEnd,source,destination).stream().toList();
-        return flights;
+    public FlightDataDTO getFlightsinTimeRange(Date departureDate,String source,String destination,String seatClass,int noOfAdults, int noOfChildren,int noOfInfants,String trip){
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        FlightDataDTO json = webClient.baseUrl("https://api.flightapi.io/"+trip+"/653d46f801b26894ef8d8719/"+source+"/"+destination+"/"+dateFormat.format(departureDate)+"/"+noOfAdults+"/"+noOfChildren+"/"+noOfInfants+"/"+seatClass+"/USD")
+//                .build()
+//                .get()
+//                .retrieve()
+//                .bodyToMono(FlightDataDTO.class)
+//                //.onErrorReturn(new FlightDataDTO())
+//                .block();
+//        log.info(String.valueOf(json));
+//        assert json != null;
+//        json.getLegs().stream().forEach(leg -> {
+//            Optional<Map<String, Object>> trips = json.getTrips().stream().filter(eachTrip -> ((List<String>) eachTrip.get("legIds")).contains(leg.get("id")) ).findFirst();
+//            Optional<Map<String, Object>> fares = json.getFares().stream().filter(fare -> fare.get("tripId").equals(trips.get().get("id"))).findFirst();
+//            Optional<Map<String, Object>> airlines = json.getAirlines().stream().filter(airline -> airline.get("code").equals(((List<String>) leg.get("airlineCodes")).get(0))).findFirst();
+//            leg.put("prices",fares);
+//            leg.put("airlines",airlines);
+//        });
+//        return json;
+        return null;
     }
 }

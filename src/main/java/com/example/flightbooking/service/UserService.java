@@ -29,7 +29,7 @@ public class UserService {
         User user = mapper.toUser(registrationRequest);
         Optional<User> user1 = userRepository.findById(user.getEmail());
         if(user1.isEmpty()){
-            user.setRoles(List.of(Role.Passenger));
+            user.setRoles(registrationRequest.getRoles());
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
         }
