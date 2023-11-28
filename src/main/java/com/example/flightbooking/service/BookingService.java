@@ -22,9 +22,9 @@ public class BookingService {
     public List<Booking> findAllBookingsByEmail(findBookingsDTO dto){
         return bookingRepository.findByEmail(dto.getEmail());
     }
-    public void addBooking(BookingDTO bookingDTO){
+    public Booking addBooking(BookingDTO bookingDTO){
         Booking booking = mapper.toBooking(bookingDTO);
-        bookingRepository.save(booking);
+        return bookingRepository.save(booking);
     }
     public void deleteBooking(String bookingID){
         bookingRepository.deleteById(bookingID);

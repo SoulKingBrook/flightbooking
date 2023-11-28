@@ -20,7 +20,7 @@ public class FlightController {
     @ResponseStatus(HttpStatus.OK)
     public FlightDataDTO getFlights(@RequestBody FlightsRequestDTO flightsRequestDTO) {
 
-        FlightDataDTO flights = flightService.getFlightsinTimeRange(flightsRequestDTO.getDepartureDate(),flightsRequestDTO.getSource(), flightsRequestDTO.getDestination(), flightsRequestDTO.getBookingClass(), flightsRequestDTO.getNoOfAdults(), flightsRequestDTO.getNoOfChildren(), flightsRequestDTO.getNoOfInfants(), flightsRequestDTO.getTrip());
+        FlightDataDTO flights = flightService.getFlightsinTimeRange(flightsRequestDTO.getDepartureDate(),flightsRequestDTO.getArrivalDate(),flightsRequestDTO.getSource(), flightsRequestDTO.getDestination(), flightsRequestDTO.getBookingClass(), flightsRequestDTO.getNoOfAdults(), flightsRequestDTO.getNoOfChildren(), flightsRequestDTO.getNoOfInfants(), flightsRequestDTO.getTrip());
         return flights;
     }
 }

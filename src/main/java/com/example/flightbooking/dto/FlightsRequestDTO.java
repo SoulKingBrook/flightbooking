@@ -16,6 +16,8 @@ public class FlightsRequestDTO {
     String destination;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private Date departureDate;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    private Date arrivalDate;
     private String bookingClass;
     private String trip;
     private int noOfAdults;

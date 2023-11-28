@@ -22,18 +22,17 @@ public class BookingController {
     private final BookingService bookingService;
     @PostMapping("")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void addBooking(@RequestBody BookingDTO bookingDTO){
-        bookingService.addBooking(bookingDTO);
+    public String addBooking(@RequestBody BookingDTO bookingDTO){
+        return bookingService.addBooking(bookingDTO).getBookingID();
     }
     @PostMapping("/my-bookings")
     @ResponseStatus(HttpStatus.OK)
     public List<Booking> findBookingsByEmail(@RequestBody findBookingsDTO dto){
         return bookingService.findAllBookingsByEmail(dto);
     }
-    @DeleteMapping("/my-bookings")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deleteBooking(@RequestBody DeleteBookingDTO dto){
-        bookingService.deleteBooking(dto.getBookingID());
+    @PostMapping("/my-bookings/{bookingID}")
+    public void deleteBooking(@PathVariable String bookingID){
+        bookingService.deleteBooking(bookingID);
     }
     @GetMapping("/all-bookings")
     @ResponseStatus(HttpStatus.ACCEPTED)
