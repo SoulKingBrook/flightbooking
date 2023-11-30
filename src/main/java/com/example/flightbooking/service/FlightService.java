@@ -22,10 +22,10 @@ public class FlightService {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String baseUrl;
         if(trip.equals("roundtrip")){
-             baseUrl = "https://api.flightapi.io/"+trip+"/6543ce1ce654fd8dad608c94/"+source+"/"+destination+"/"+dateFormat.format(departureDate)+"/"+dateFormat.format(arrivalDate)+"/"+noOfAdults+"/"+noOfChildren+"/"+noOfInfants+"/"+seatClass+"/USD";
+             baseUrl = "https://api.flightapi.io/"+trip+"/6567a5a87c2715dd88f941aa/"+source+"/"+destination+"/"+dateFormat.format(departureDate)+"/"+dateFormat.format(arrivalDate)+"/"+noOfAdults+"/"+noOfChildren+"/"+noOfInfants+"/"+seatClass+"/USD";
         }
         else{
-             baseUrl = "https://api.flightapi.io/"+trip+"/6543ce1ce654fd8dad608c94/"+source+"/"+destination+"/"+dateFormat.format(departureDate)+"/"+noOfAdults+"/"+noOfChildren+"/"+noOfInfants+"/"+seatClass+"/USD";
+             baseUrl = "https://api.flightapi.io/"+trip+"/6567a5a87c2715dd88f941aa/"+source+"/"+destination+"/"+dateFormat.format(departureDate)+"/"+noOfAdults+"/"+noOfChildren+"/"+noOfInfants+"/"+seatClass+"/USD";
         }
         FlightDataDTO json = webClient.baseUrl(baseUrl)
                 .build()
